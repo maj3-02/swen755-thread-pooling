@@ -24,5 +24,9 @@ Build or run tests:
 
 On macOS or Linux, use `bash ./gradlew` instead of `.\gradlew.bat`.
 
-The application currently prints a startup message. Prime searching and the
-custom thread pool are not implemented yet. JUnit 4.13.2 is configured for tests.
+`PrimeSearch.findPrimes(startInclusive, endInclusive)` returns the primes in a
+range as an ascending list, including both endpoints. Each call has independent
+results and can run concurrently.
+
+The application currently prints a startup message. The custom thread pool is
+not implemented yet. Tests use JUnit 4.13.2.
