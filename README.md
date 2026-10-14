@@ -28,5 +28,15 @@ On macOS or Linux, use `bash ./gradlew` instead of `.\gradlew.bat`.
 range as an ascending list, including both endpoints. Each call has independent
 results and can run concurrently.
 
-The application currently prints a startup message. The custom thread pool is
-not implemented yet. Tests use JUnit 4.13.2.
+`PrimeSearch.findPrimes(startInclusive, endInclusive, threadCount)` uses the
+custom fixed-size `ThreadPool`. The candidate range is divided into one
+contiguous task per worker. Task sizes differ by at most one candidate, with
+any remainder assigned to the first workers. Results are joined in range order,
+so the returned primes remain sorted.
+
+`ThreadPool` delegates worker selection to a strategy in the
+`threadpooling.schedule` package. `RoundRobinSchedulingStrategy` is used by
+default and assigns submitted tasks evenly by task count. A different strategy can be passed to
+`ThreadPool(threadCount, strategy)`; each scheduling decision receives an
+immutable snapshot of the workers' queued-task counts. The pool finishes queued
+work and joins its worker threads when closed. Tests use JUnit 4.13.2.
