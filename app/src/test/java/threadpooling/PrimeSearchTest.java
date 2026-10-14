@@ -138,4 +138,16 @@ public class PrimeSearchTest {
             secondWorker.join();
         }
     }
+
+    @Test
+    public void evenlySplitThreadPoolSearchMatchesSequentialSearch() {
+        assertEquals(search.findPrimes(1, 100), search.findPrimes(1, 100, 6));
+        assertEquals(search.findPrimes(2, 5), search.findPrimes(2, 5, 20));
+        assertEquals(List.of(), search.findPrimes(-10, 1, 4));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void threadedSearchRejectsNonPositiveThreadCounts() {
+        search.findPrimes(1, 10, 0);
+    }
 }
