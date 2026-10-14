@@ -18,7 +18,10 @@ repositories {
 dependencies {
     // Use JUnit test framework.
     testImplementation(libs.junit)
+}
 
+tasks.test {
+    useJUnit()
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
