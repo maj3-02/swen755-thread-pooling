@@ -24,6 +24,8 @@ Build or run tests:
 
 On macOS or Linux, use `bash ./gradlew` instead of `.\gradlew.bat`.
 
+### Functions and Design
+
 `PrimeSearch.findPrimes(startInclusive, endInclusive)` returns the primes in a
 range as an ascending list, including both endpoints. Each call has independent
 results and can run concurrently.
@@ -58,3 +60,9 @@ Tasks: 100
 Prime numbers found: 664579
 Execution time: 2.070694 seconds
 ```
+
+
+### Libraries Used
+- JUnit 4 is used for unit test implementation.
+- `java.util.concurrent` is used for threads / thread pooling.
+-
