@@ -40,3 +40,21 @@ default and assigns submitted tasks evenly by task count. A different strategy c
 `ThreadPool(threadCount, strategy)`; each scheduling decision receives an
 immutable snapshot of the workers' queued-task counts. The pool finishes queued
 work and joins its worker threads when closed. Tests use JUnit 4.13.2.
+
+An alternate `LeastLoadedSchedulingStrategy` is provided as a comparison to `RoundRobinSchedulingStrategy`.
+Instead of rotating through each worker in round robin, least-loaded selects the worker with the minimum number
+of tasks remaining in the queue. Running these strategies side-by-side demonstrates a slight edge for the
+`LeastLoadedSchedulingStrategy` with the current number of threads/tasks:
+```bash
+Strategy: Round Robin
+Threads: 10
+Tasks: 100
+Prime numbers found: 664579
+Execution time: 2.455606 seconds
+
+Strategy: Least Loaded
+Threads: 10
+Tasks: 100
+Prime numbers found: 664579
+Execution time: 2.070694 seconds
+```
